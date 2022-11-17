@@ -487,7 +487,7 @@ h1, h2, h3, p, ul {
   text-align: left;
 }
 
-.projects-thumb:hover .projects-overlay {
+.project-list-item:hover .projects-overlay {
   transform: translateY(0);
 }
 
