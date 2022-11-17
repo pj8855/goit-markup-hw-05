@@ -88,6 +88,28 @@ h1, h2, h3, p, ul {
   letter-spacing: 0.02em;
   color: var(--headline-color);
   padding: 32px 0;
+  position: relative;
+}
+
+.menu-link::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--brand-color);
+  border: 1px solid #000000;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  transition: opacity 250ms;
+}
+
+.menu-link:hover::after,
+.menu-link:focus::after {
+  opacity: 1;
 }
 
 .menu-link:hover,
@@ -98,6 +120,21 @@ h1, h2, h3, p, ul {
 /* -- Колір визначення розташування -- */
 .main {
   color: var(--brand-color);
+}
+
+.main::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--brand-color);
+  border: 1px solid #000000;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  opacity: 1;
 }
 
 /* -- Телефон та пошта у хедері -- */
@@ -226,6 +263,30 @@ h1, h2, h3, p, ul {
 .about-list {
   display: flex;
   gap: 30px;
+}
+
+.about-list-item {
+  position: relative;
+}
+
+.overlay {
+  background: rgba(47, 48, 58, 0.8);
+  backdrop-filter: blur(2px);
+  position: absolute;
+  bottom: 0;
+  padding-top: 27px;
+  padding-bottom: 27px;
+  width: 100%;
+}
+
+.overlay-text {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.14;
+  text-align: center;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color:var(--footer-color);
 }
 
 /* -- Секція Команда -- */
@@ -384,12 +445,50 @@ h1, h2, h3, p, ul {
   justify-content: center;
 }
 
+.project-list-item {
+  width: 370px;
+  border: 1px solid #EEEEEE;
+}
+
 .project-list-item:hover,
 .project-list-item:focus {
-  width: 370px;
   background: #FFFFFF;
-  border: 1px solid #EEEEEE;
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06), 1px 4px 6px rgba(0, 0, 0, 0.16);
+}
+
+.projects-thumb {
+  position: relative;
+  overflow: hidden;
+}
+
+.projects-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(33, 150, 243, 0.9);
+  display: flex;
+  align-items: center;
+  padding-left: 24px;
+  padding-right: 24px;
+  transform: translateY(100%);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+}
+
+.projects-overlay-text {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.55;
+  letter-spacing: 0.03em;
+  color: #FFFFFF;
+  text-transform: none;
+  text-align: left;
+}
+
+.projects-thumb:hover .projects-overlay {
+  transform: translateY(0);
 }
 
 .project-title {
@@ -410,7 +509,6 @@ h1, h2, h3, p, ul {
   display: flex;
   flex-direction: column;
   background: #FFFFFF;
-  border: 1px solid #EEEEEE;
   padding: 20px 24px;
 }
 
@@ -495,4 +593,61 @@ address {
   display: flex;
   align-items: baseline;
   gap: 70px;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(2px);
+  transition: opacity 150ms cubic-bezier(0.4, 0, 0.2, 1), visibility 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.backdrop.is-hidden {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 528px;
+  min-height: 581px;
+  background-color: var(--footer-color);
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  transition: transform 250ms, opacity 250ms;
+}
+
+.backdrop.is-hidden .modal {
+  opacity: 0;
+  transform: translateX(-50%) translateY(-70%);
+}
+
+.modal-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  padding: 0;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: var(--footer-color);
+}
+
+.modal-icon {
+  fill: #000000;
 }
